@@ -4,6 +4,27 @@
 Data::SubTable Semantics::subs;
 Data::Subroutine* Semantics::current;
 
+void Semantics::parseEscape(std::string& s, const std::string& escp, const std::string& repl)
+{
+    size_t pos = 0;
+    while((pos = s.find(escp, pos)) != std::string::npos) {
+        if(s[pos - 1] == '\\') {
+            pos += escp.length();
+            continue;
+        }
+        s.replace(pos, escp.length(), repl);
+    }
+}
+
+void Semantics::parseEscapes(std::string& s)
+{
+    parseEscape(s, "\\n", "\n");
+    parseEscape(s, "\\s", " ");
+    parseEscape(s, "\\t", "\t");
+    parseEscape(s, "\\v", "\v");
+    parseEscape(s, "\\b", "\b");
+}
+
 void Semantics::goUp(char c)
 {
     X_ASSERT(c == ')');
@@ -36,6 +57,7 @@ void Semantics::addChar(char c)
 void Semantics::addString(IteratorType begin, IteratorType end)
 {
     std::string value = std::string(begin, end);
+    parseEscapes(value);
     current->addInstruction(new Data::Instruction(value));
 }
 

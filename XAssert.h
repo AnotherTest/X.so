@@ -1,6 +1,6 @@
 /**
  * @file XAssert.h
- * Contains the macros and functions required for GH_ASSERT.
+ * Contains the macros and functions required for X_ASSERT.
  * @author Tim Beyne
  */
 #ifndef _X_ASSERT_H_INCLUDE_GUARD

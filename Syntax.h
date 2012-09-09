@@ -15,6 +15,8 @@ namespace Semantics {
     extern Data::SubTable subs;
     extern Data::Subroutine* current;
 
+    void parseEscape(std::string& s, const std::string& escp, const std::string& repl);
+    void parseEscapes(std::string& s);
     /**
      * @pre c == ')'
      */
