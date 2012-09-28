@@ -30,7 +30,8 @@ int main(int argc, char** argv)
         return 2;
     }
     ModuleLoader mod_loader;
-    Interpreter x(Semantics::getRoutines(), mod_loader);
+    Data::XStack stack;
+    Interpreter x(Semantics::getRoutines(), mod_loader, stack);
     x.interpret();
     Semantics::cleanUp();
 }
